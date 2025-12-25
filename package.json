@@ -2,6 +2,7 @@
   "name": "@zos-apps/stickies",
   "version": "4.2.0",
   "description": "Desktop sticky notes",
+  "homepage": "https://zos-apps.github.io/stickies",
   "main": "src/index.tsx",
   "types": "src/index.tsx",
   "files": ["src"],
@@ -11,18 +12,35 @@
     "icon": "📌",
     "category": "productivity",
     "permissions": ["storage"],
-    "installable": true
+    "installable": true,
+    "shortcut": "",
+    "menu": {
+      "help": {
+        "documentation": "https://zos-apps.github.io/stickies",
+        "reportIssue": "https://github.com/zos-apps/stickies/issues"
+      }
+    },
+    "contextMenu": [
+      {"label": "Open", "action": "open"},
+      {"label": "Open in New Window", "action": "openNew"},
+      {"type": "separator"},
+      {"label": "Get Info", "action": "getInfo"},
+      {"label": "Show in Finder", "action": "showInFinder"}
+    ]
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "lucide-react": ">=0.300.0"
   },
-  "keywords": ["zos", "app", "stickies"],
+  "keywords": ["zos", "app", "stickies", "macos", "desktop"],
   "author": "Hanzo AI",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zos-apps/stickies.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zos-apps/stickies/issues"
   }
 }
