@@ -13,10 +13,27 @@ npm install github:zos-apps/stickies
 ## Usage
 
 ```tsx
-import ZStickies from '@zos-apps/stickies';
+import App from '@zos-apps/stickies';
 
-function App() {
-  return <ZStickies />;
+function MyApp() {
+  return <App />;
+}
+```
+
+## Package Spec
+
+App metadata is defined in `package.json` under the `zos` field:
+
+```json
+{
+  "zos": {
+    "id": "ai.hanzo.stickies",
+    "name": "Stickies",
+    "icon": "📌",
+    "category": "productivity",
+    "permissions": ["storage"],
+    "installable": true
+  }
 }
 ```
 
