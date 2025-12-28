@@ -1,0 +1,77 @@
+{
+  "name": "@zos-apps/stickies",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "zos": {
+    "id": "ai.hanzo.stickies",
+    "name": "Stickies",
+    "icon": "📌",
+    "category": "productivity",
+    "description": "Sticky notes for quick reminders",
+    "permissions": [],
+    "window": {
+      "defaultSize": {
+        "width": 300,
+        "height": 300
+      },
+      "resizable": true
+    },
+    "about": "Sticky notes for quick reminders",
+    "screenshots": {
+      "hero": "screenshots/hero.png",
+      "images": [
+        "screenshots/1-main.png"
+      ]
+    },
+    "downloads": {
+      "web": "https://zos-apps.github.io/stickies"
+    },
+    "featured": false,
+    "tags": [
+      "productivity",
+      "stickies"
+    ],
+    "releaseDate": "2025-12-28",
+    "support": "https://github.com/zos-apps/stickies/issues",
+    "changelog": "https://github.com/zos-apps/stickies/releases"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  },
+  "description": "Sticky notes for quick reminders",
+  "homepage": "https://zos-apps.github.io/stickies",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zos-apps/stickies.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zos-apps/stickies/issues"
+  },
+  "author": "Hanzo AI",
+  "license": "MIT",
+  "keywords": [
+    "zos",
+    "app",
+    "stickies",
+    "macos",
+    "desktop"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
