@@ -1,16 +1,15 @@
-import React, { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Plus, Trash2, Pin, PinOff } from 'lucide-react';
 import { cn } from '@z-os/ui';
-
-interface StickiesProps {
-  onClose: () => void;}
+import type { AppProps } from '@zos-apps/config';
+import { useLocalStorage } from '@zos-apps/config';
 
 interface StickyNote {
   id: string;
   content: string;
   color: string;
   pinned: boolean;
-  createdAt: Date;
+  createdAt: number; // Use number for JSON serialization
 }
 
 const COLORS = [
@@ -22,31 +21,33 @@ const COLORS = [
   { id: 'orange', bg: 'bg-orange-200', text: 'text-orange-900', border: 'border-orange-300' },
 ];
 
-const Stickies: React.FC<StickiesProps> = ({ onClose }) => {
-  const [notes, setNotes] = useState<StickyNote[]>([
-    {
-      id: '1',
-      content: 'Welcome to Stickies!\n\nClick the + button to add a new note.',
-      color: 'yellow',
-      pinned: true,
-      createdAt: new Date(),
-    },
-    {
-      id: '2',
-      content: 'Shopping List:\n- Milk\n- Bread\n- Eggs\n- Coffee',
-      color: 'pink',
-      pinned: false,
-      createdAt: new Date(),
-    },
-    {
-      id: '3',
-      content: 'Meeting notes:\n\nDiscuss project timeline\nReview budget\nAssign tasks',
-      color: 'green',
-      pinned: false,
-      createdAt: new Date(),
-    },
-  ]);
-  const [selectedNote, setSelectedNote] = useState<string | null>('1');
+const defaultNotes: StickyNote[] = [
+  {
+    id: '1',
+    content: 'Welcome to Stickies!\n\nClick the + button to add a new note.',
+    color: 'yellow',
+    pinned: true,
+    createdAt: Date.now(),
+  },
+  {
+    id: '2',
+    content: 'Shopping List:\n- Milk\n- Bread\n- Eggs\n- Coffee',
+    color: 'pink',
+    pinned: false,
+    createdAt: Date.now(),
+  },
+  {
+    id: '3',
+    content: 'Meeting notes:\n\nDiscuss project timeline\nReview budget\nAssign tasks',
+    color: 'green',
+    pinned: false,
+    createdAt: Date.now(),
+  },
+];
+
+const Stickies: React.FC<AppProps> = ({ onClose: _onClose }) => {
+  const [notes, setNotes] = useLocalStorage<StickyNote[]>('stickies', defaultNotes);
+  const [selectedNote, setSelectedNote] = useLocalStorage<string | null>('stickies-selected', '1');
 
   const getColorClasses = (colorId: string) => {
     return COLORS.find(c => c.id === colorId) || COLORS[0];
@@ -58,30 +59,30 @@ const Stickies: React.FC<StickiesProps> = ({ onClose }) => {
       content: '',
       color: COLORS[Math.floor(Math.random() * COLORS.length)].id,
       pinned: false,
-      createdAt: new Date(),
+      createdAt: Date.now(),
     };
     setNotes(prev => [newNote, ...prev]);
     setSelectedNote(newNote.id);
-  }, []);
+  }, [setNotes, setSelectedNote]);
 
   const deleteNote = useCallback((id: string) => {
     setNotes(prev => prev.filter(n => n.id !== id));
     if (selectedNote === id) {
       setSelectedNote(notes.length > 1 ? notes.find(n => n.id !== id)?.id || null : null);
     }
-  }, [selectedNote, notes]);
+  }, [selectedNote, notes, setNotes, setSelectedNote]);
 
   const updateNote = useCallback((id: string, content: string) => {
     setNotes(prev => prev.map(n => n.id === id ? { ...n, content } : n));
-  }, []);
+  }, [setNotes]);
 
   const togglePin = useCallback((id: string) => {
     setNotes(prev => prev.map(n => n.id === id ? { ...n, pinned: !n.pinned } : n));
-  }, []);
+  }, [setNotes]);
 
   const changeColor = useCallback((id: string, color: string) => {
     setNotes(prev => prev.map(n => n.id === id ? { ...n, color } : n));
-  }, []);
+  }, [setNotes]);
 
   const selectedNoteData = notes.find(n => n.id === selectedNote);
 

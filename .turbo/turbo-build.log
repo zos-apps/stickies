@@ -1,0 +1,18 @@
+
+> @zos-apps/stickies@1.0.0 build /Users/z/work/zeekay/zos-apps/stickies
+> tsup
+
+CLI Building entry: src/index.tsx
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/z/work/zeekay/zos-apps/stickies/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+"useRef" and "useEffect" are imported from external module "react" but never used in "dist/index.js".
+ESM dist/index.js     4.65 KB
+ESM dist/index.js.map 26.50 KB
+ESM ⚡️ Build success in 129ms
+DTS Build start
+DTS ⚡️ Build success in 650ms
+DTS dist/index.d.ts 123.00 B
